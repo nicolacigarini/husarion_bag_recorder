@@ -90,6 +90,7 @@ void husarion_bag_recorder_node::joystickCallback(const sensor_msgs::msg::Joy &m
     if(!_flags.allowRestart && msg.buttons[2] == 1) {
         RCLCPP_INFO(this->get_logger(), "triggered stop");
         _flags.allowRestart = true;
+        _flags.saveToBag = false;
         stopRecording();
     }
 
