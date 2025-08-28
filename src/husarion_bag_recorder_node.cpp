@@ -1,4 +1,4 @@
-#include "../include/x500_bag_recorder/x500_bag_recorder_node.hpp"
+#include "../include/husarion_bag_recorder/husarion_bag_recorder_node.hpp"
 
 husarion_bag_recorder_node::husarion_bag_recorder_node(): Node("husarion_bag_recorder_node",
                                                         rclcpp::NodeOptions()
