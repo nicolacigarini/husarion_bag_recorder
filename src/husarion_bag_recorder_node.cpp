@@ -14,7 +14,7 @@ husarion_bag_recorder_node::husarion_bag_recorder_node(): Node("husarion_bag_rec
 }
 
 void husarion_bag_recorder_node::startRecording() {
-    RCLCPP_INFO(this->get_logger(), "before opening");
+    //RCLCPP_INFO(this->get_logger(), "before opening");
 
     std::time_t t = std::time(nullptr);
     std::tm tm = *std::localtime(&t);
@@ -24,7 +24,7 @@ void husarion_bag_recorder_node::startRecording() {
     storage_options.uri = this->get_parameter("file_path").as_string() + "/bag_" + std::string(buffer);
     storage_options.storage_id = "sqlite3";
     _bagWriter.open(storage_options);   
-    RCLCPP_INFO(this->get_logger(), "after opening");
+    //RCLCPP_INFO(this->get_logger(), "after opening");
     std::cout << "Local time: " << std::put_time(&tm, "%c %Z") << '\n';
 
 
@@ -81,10 +81,13 @@ void husarion_bag_recorder_node::vehicleOdomCallback(std::shared_ptr<rclcpp::Ser
 
 void husarion_bag_recorder_node::joystickCallback(const sensor_msgs::msg::Joy &msg){
     if(_flags.allowRestart && msg.buttons[1] == 1){
+        RCLCPP_INFO(this->get_logger(), "triggered start");
         startRecording();
+        _flags.saveToBag = 1;
         _flags.allowRestart = false;
     }
-    if(!_flags.allowRestart && msg.buttons[2] ==1) {
+    if(!_flags.allowRestart && msg.buttons[2] == 1) {
+        RCLCPP_INFO(this->get_logger(), "triggered stop");
         stopRecording();
         _flags.allowRestart = true;
     }
