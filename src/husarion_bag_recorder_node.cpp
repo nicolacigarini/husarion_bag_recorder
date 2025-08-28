@@ -82,14 +82,15 @@ void husarion_bag_recorder_node::vehicleOdomCallback(std::shared_ptr<rclcpp::Ser
 void husarion_bag_recorder_node::joystickCallback(const sensor_msgs::msg::Joy &msg){
     if(_flags.allowRestart && msg.buttons[1] == 1){
         RCLCPP_INFO(this->get_logger(), "triggered start");
-        startRecording();
         _flags.saveToBag = 1;
         _flags.allowRestart = false;
+        startRecording();
+
     }
     if(!_flags.allowRestart && msg.buttons[2] == 1) {
         RCLCPP_INFO(this->get_logger(), "triggered stop");
-        stopRecording();
         _flags.allowRestart = true;
+        stopRecording();
     }
 
 }
