@@ -11,7 +11,7 @@ ARGUMENTS = [DeclareLaunchArgument("namespace", default_value='x500_1', descript
 
 def generate_launch_description():
     namespace = LaunchConfiguration("namespace")
-    bag_recorder_params_file = PathJoinSubstitution([FindPackageShare("x500_bag_recorder"), "config", "params.yaml"])
+    bag_recorder_params_file = PathJoinSubstitution([FindPackageShare("husarion_bag_recorder"), "config", "params.yaml"])
 
     bag_recorder_node = Node(
         package="husarion_bag_recorder",
