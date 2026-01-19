@@ -1,4 +1,4 @@
-/husarion_bag_recorder_node:
+/**/husarion_bag_recorder_node:
  ros__parameters:
   lidar_subscriber_topic: livox/lidar
   imu_lidar_subscriber_topic: livox/imu
