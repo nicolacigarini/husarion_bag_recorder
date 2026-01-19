@@ -7,16 +7,15 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.event_handlers import OnProcessExit
 
 
-ARGUMENTS = [DeclareLaunchArgument("namespace", default_value='x500_1', description="Robot #1 namespace")]
-
-def generate_launch_description():
-    namespace_arg = DeclareLaunchArgument("namespace", default_value='x500_1', description="Robot #1 namespace")
-    user_config_file_arg = DeclareLaunchArgument(
+ARGUMENTS = [
+    DeclareLaunchArgument("namespace", default_value='x500_1', description="Robot #1 namespace"),
+    DeclareLaunchArgument(
         'user_config_file',
         default_value = PathJoinSubstitution([FindPackageShare("husarion_bag_recorder"), "config", "params.yaml"]),
         description="Path to config file"
-    )
+    )]
 
+def generate_launch_description():
     bag_recorder_params_file = LaunchConfiguration("user_config_file")
     namespace = LaunchConfiguration("namespace")
 
